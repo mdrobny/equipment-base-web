@@ -1,0 +1,24 @@
+<table id="table" datatable="ng" class="row-border hover" >
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Owner</th>
+            <th>Model</th>
+            <th>Producer</th>
+            <th>Room</th>
+            <th>Building</th>
+            <th>Security level</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="device in devices">
+            <td>{{device.id}}</td>
+            <td>{{device.owner.firstName + " " + device.owner.lastName}}</td>
+            <td>{{device.model.name}}</td>
+            <td>{{device.model.producer.name}}</td>
+            <td>{{device.room.name}}</td>
+            <td>{{device.room.building.name}}</td>
+            <td>{{device.securityLevel}}</td>
+        </tr>
+    </tbody>
+</table>
