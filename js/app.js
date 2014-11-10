@@ -8,10 +8,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/devices.html',
             controller: 'devicesController'
         }).
-        when('/device/:id', {
-            templateUrl: 'templates/device.html',
-            controller: 'deviceController'
-        }).
         otherwise({
             redirectTo: '/devices'
         });

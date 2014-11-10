@@ -1,6 +1,63 @@
 <table id="table" datatable="ng" class="row-border hover" >
     <thead>
         <tr>
+            <th>
+                <div class="form-group">
+                    <label>
+                        <input autofocus="" class="form-control" type="number" name="id" ng-model="item.id" value="" disabled>
+                    </label>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" name="firstName" ng-model="item.owner.firstName" value="">
+                    </label>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" name="model" ng-model="item.model.name" data-id="item.model.id" value="">
+                    </label>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" name="producer" ng-model="item.model.producer.name" data-id="item.model.producer.id" value="">
+                    </label>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" name="room" ng-model="item.room.name" data-id="item.room.id" value="">
+                    </label>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" name="building" ng-model="item.room.building.name" data-id="item.room.building.id" value="">
+                    </label>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>
+                        <input type="text" class="form-control" name="securityLevel" ng-model="item.securityLevel" value="" disabled>
+                    </label>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <button type="submit" ng-click="onSubmit()" class="btn btn-success">{{itemStatus}}</button>
+                    <button ng-if="itemStatus == 'update'" ng-click="onEditCancel()" class="btn btn-warning">Cancel</button>
+                </div>
+            </th>
+        </tr>
+        <tr>
             <th>ID</th>
             <th>Owner</th>
             <th>Model</th>
@@ -8,10 +65,11 @@
             <th>Room</th>
             <th>Building</th>
             <th>Security level</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="device in devices">
+        <tr ng-repeat="device in list">
             <td>{{device.id}}</td>
             <td>{{device.owner.firstName + " " + device.owner.lastName}}</td>
             <td>{{device.model.name}}</td>
@@ -19,6 +77,10 @@
             <td>{{device.room.name}}</td>
             <td>{{device.room.building.name}}</td>
             <td>{{device.securityLevel}}</td>
+            <td>
+                <button type="button" ng-click="onEdit($index)" class="list-btn btn btn-lg btn-warning">edit</button>
+                <button type="button" ng-click="onDelete($index)" class="list-btn btn btn-lg btn-danger">delete</button>
+            </td>
         </tr>
     </tbody>
 </table>
