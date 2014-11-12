@@ -11,35 +11,35 @@
             <th>
                 <div class="form-group">
                     <label>
-                        <input type="text" class="form-control" name="firstName" ng-model="item.owner.firstName" value="">
+                        <select ng-model="item.owner.id" ng-options="user.id as (user.firstName +' '+ user.lastName) for user in users" class="form-control" name="owner"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <input type="text" class="form-control" name="model" ng-model="item.model.name" data-id="item.model.id" value="">
+                        <select ng-model="item.model.id" ng-options="model.id as model.name for model in models" class="form-control" name="model"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <input type="text" class="form-control" name="producer" ng-model="item.model.producer.name" data-id="item.model.producer.id" value="">
+                        <select ng-model="item.model.producer.id" ng-options="producer.id as producer.name for producer in producers" class="form-control" name="producer"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <input type="text" class="form-control" name="room" ng-model="item.room.name" data-id="item.room.id" value="">
+                        <select ng-model="item.room.id" ng-options="room.id as room.name for room in rooms" class="form-control" name="room"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <input type="text" class="form-control" name="building" ng-model="item.room.building.name" data-id="item.room.building.id" value="">
+                        <select ng-model="item.room.building.id" ng-options="building.id as building.name for building in buildings" class="form-control" name="building"></select>
                     </label>
                 </div>
             </th>
@@ -52,7 +52,8 @@
             </th>
             <th>
                 <div class="form-group">
-                    <button type="submit" ng-click="onSubmit()" class="btn btn-success">{{itemStatus}}</button>
+                    <button ng-if="itemStatus == 'add'" type="submit" ng-click="onAdd()" class="btn btn-success">add</button>
+                    <button ng-if="itemStatus == 'update'" type="submit" ng-click="onUpdate()" class="btn btn-success">update</button>
                     <button ng-if="itemStatus == 'update'" ng-click="onEditCancel()" class="btn btn-warning">Cancel</button>
                 </div>
             </th>
