@@ -4,63 +4,43 @@ controllers.controller('devicesController', [
     '$scope', '$timeout', '$filter', '$q', 'Device', 'User', 'Model', 'Producer', 'Room', 'Building',
 
     function($scope, $timeout, $filter, $q, Device, User, Model, Producer, Room, Building) {
-        var defaultItem, tmpItem,
+        var defaultItem, editedItemIndex = -1,
             list, users, models, producers, rooms, buildings;
-        defaultItem = {
-            "id": "",
-            "model": {
-                "id": 10,
-                "name": "cubilia",
-                "producer": {
-                    "id": 5,
-                    "name": "Voonyx"
-                }
-            },
-            "owner": {
-                "firstName": "Evelyn",
-                "id": 22,
-                "lastName": "Barnes",
-                "login": "ebarnesl",
-                "securityLevel": 3
-            },
-            "room": {
-                "building": {
-                    "id": 2,
-                    "name": "D2"
-                },
-                "id": 4,
-                "name": "3"
-            },
-            "securityLevel": 2
-        };
+
         function resetAddForm() {
             $scope.item = defaultItem;
             $scope.itemStatus = "add";
+            editedItemIndex = -1;
         }
 
         function onDataFetchSuccess() {
             $scope.list = list;
 
             $scope.onDelete = function(index) {
-                list.splice(index, 1);
-                Device.delete({id: $scope.item.id});
+                var item = list.splice(index, 1)[0];
+                Device.delete({id: item.id});
             };
+            /** Removes element from list **/
             $scope.onEdit = function(index) {
-                tmpItem = list.slice(index, index + 1)[0];
-                $scope.item = tmpItem;
+                editedItemIndex = index;
+                $scope.item = list.slice(index, index + 1)[0];
                 $scope.itemStatus = "update";
+                angular.element('.select-1').focus();
             };
             $scope.onEditCancel = function() {
                 resetAddForm();
             };
             $scope.onUpdate = function() {
                 Device.update({id: $scope.item.id}, $scope.item);
+                $scope.list[editedItemIndex] = $scope.item;
                 resetAddForm();
             };
             $scope.onAdd = function() {
-                tmpItem = $scope.item;
+                var itemClone = angular.copy($scope.item),
+                    tmpItem = $scope.item;
                 delete tmpItem["id"];
-                Device.save($scope.item);
+                Device.save(tmpItem);
+                $scope.list.push(itemClone);
                 resetAddForm();
             }
         }
@@ -80,6 +60,12 @@ controllers.controller('devicesController', [
                     $scope.producers = producers;
                     $scope.rooms = rooms;
                     $scope.buildings = buildings;
+                    defaultItem = {
+                        model: models[0],
+                        owner: users[0],
+                        room: rooms[0],
+                        securityLevel: 1
+                    };
                     resetAddForm();
                     d.resolve();
                 }, 0);

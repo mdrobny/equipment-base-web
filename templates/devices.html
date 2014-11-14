@@ -11,42 +11,42 @@
             <th>
                 <div class="form-group">
                     <label>
-                        <select ng-model="item.owner.id" ng-options="user.id as (user.firstName +' '+ user.lastName) for user in users" class="form-control" name="owner"></select>
+                        <select ng-model="item.owner" ng-options="user as (user.firstName +' '+ user.lastName) for user in users track by user.id" class="form-control select-1" name="owner"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <select ng-model="item.model.id" ng-options="model.id as model.name for model in models" class="form-control" name="model"></select>
+                        <select ng-model="item.model" ng-options="model as model.name for model in models track by model.id" class="form-control" name="model"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <select ng-model="item.model.producer.id" ng-options="producer.id as producer.name for producer in producers" class="form-control" name="producer"></select>
+                        <select ng-model="item.model.producer" ng-options="producer as producer.name for producer in producers track by producer.id" class="form-control" name="producer"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <select ng-model="item.room.id" ng-options="room.id as room.name for room in rooms" class="form-control" name="room"></select>
+                        <select ng-model="item.room" ng-options="room as room.name for room in rooms track by room.id" class="form-control" name="room"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <select ng-model="item.room.building.id" ng-options="building.id as building.name for building in buildings" class="form-control" name="building"></select>
+                        <select ng-model="item.room.building" ng-options="building as building.name for building in buildings track by building.id" class="form-control" name="building"></select>
                     </label>
                 </div>
             </th>
             <th>
                 <div class="form-group">
                     <label>
-                        <input type="text" class="form-control" name="securityLevel" ng-model="item.securityLevel" value="" disabled>
+                        <input type="text" class="form-control" name="securityLevel" ng-model="item.securityLevel" value="">
                     </label>
                 </div>
             </th>
